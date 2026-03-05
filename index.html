@@ -19,6 +19,10 @@
         
         .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 15px; }
         .btn-analizar:hover { background: #b8962d; }
+
+        /* NUEVO BOTÓN PARA LA LEY */
+        .btn-ley { background: var(--vp-dark); color: var(--vp-gold); border: 2px solid var(--vp-gold); padding: 10px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; font-size: 12px; margin-top: 10px; text-align: center; text-decoration: none; display: block; }
+        .btn-ley:hover { background: var(--vp-gold); color: white; }
         
         .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 680px; overflow-y: auto; }
         .historial-item { font-size: 0.8em; padding: 10px; border: 1px solid #ddd; background: white; margin-bottom: 8px; border-radius: 5px; cursor: pointer; }
@@ -26,7 +30,7 @@
         #reporte-final { display: none; padding: 40px; border-top: 2px dashed #ccc; position: relative; }
         
         @media print {
-            .no-print, .vp-header, .history-section, .btn-analizar { display: none !important; }
+            .no-print, .vp-header, .history-section, .btn-analizar, .btn-ley { display: none !important; }
             body { background: white; padding: 0; }
             .container { box-shadow: none; width: 100%; max-width: 100%; }
             #reporte-final { display: block !important; border: none; padding: 0; }
@@ -90,6 +94,8 @@
             </div>
             
             <button class="btn-analizar" onclick="ejecutarAnalisisFinal()">ANALIZAR, GUARDAR Y MOSTRAR REPORTE</button>
+            
+            <a href="ley15272012.html" target="_blank" class="btn-ley">📄 VER E IMPRIMIR LEY 1527 DE 2012 (BASE LEGAL)</a>
         </div>
 
         <div class="history-section no-print">
@@ -106,9 +112,7 @@
             <hr style="border: 1px solid #000;">
             <h3 style="margin-top:10px;">ESTUDIO TÉCNICO Y CERTIFICACIÓN DE LIBRANZA</h3>
         </div>
-
         <p><strong>FECHA DE EMISIÓN:</strong> <span id="rep-fecha"></span></p>
-
         <table>
             <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">I. INFORMACIÓN DEL COLABORADOR</th></tr>
             <tr>
@@ -123,7 +127,6 @@
                 <td><strong>Finalidad:</strong></td><td id="rep-finalidad" colspan="3"></td>
             </tr>
         </table>
-
         <table>
             <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">II. ANÁLISIS FINANCIERO Y MODALIDAD</th></tr>
             <tr>
@@ -139,39 +142,33 @@
                 <td><strong>Afectación Nómina:</strong></td><td><strong id="rep-por"></strong></td>
             </tr>
         </table>
-
         <div style="margin: 20px 0; border: 2px solid #000; padding: 15px; text-align: center; font-weight: bold; font-size: 1.1em;">
             DICTAMEN DE LA EMPRESA: &nbsp;&nbsp;&nbsp; 
             <span class="check-box"></span> SOLICITUD APROBADA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             <span class="check-box"></span> SOLICITUD RECHAZADA
         </div>
-
         <div class="clausula-blindada">
             <strong>AVISO LEGAL (Ley 1527 de 2012):</strong> La empresa <strong><span id="rep-emp-body"></span></strong> actúa solo como intermediario para el recaudo (agente retenedor). La responsabilidad de pago mensual cesará automáticamente al finalizar el vínculo laboral. En caso de retiro, se autoriza descontar el saldo pendiente de las prestaciones sociales. Cualquier deuda remanente deberá ser gestionada directamente entre el <strong>TRABAJADOR</strong> y el <strong>BANCO</strong>, sin responsabilidad solidaria de la empresa.
         </div>
-
         <div style="margin-top: 70px; display: flex; justify-content: space-between; text-align: center;">
             <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Firma del Trabajador / C.C.</div>
             <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Autorizado por la Empresa</div>
         </div>
-
         <div class="legal-footer">
             Reporte generado por el software de <strong>Vibras Positivas</strong> &copy; 2026 | Soporte Técnico y Propiedad Intelectual
         </div>
-        
         <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE PARA TRÁMITE</button>
     </div>
 </div>
 
 <script>
-    // Reloj Colombia
+    // (Toda tu lógica de script sigue igual)
     function actualizarReloj() {
         const op = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
         document.getElementById('reloj').innerText = `Colombia: ${new Date().toLocaleDateString('es-CO')} | ${new Date().toLocaleTimeString('es-CO', op)}`;
     }
     setInterval(actualizarReloj, 1000);
 
-    // Función que arregla el envío de datos al reporte
     function ejecutarAnalisisFinal() {
         const d = {
             emp: document.getElementById('emp').value,
@@ -188,10 +185,7 @@
             cuo: parseFloat(document.getElementById('cuo').value),
             fecha: new Date().toLocaleString('es-CO')
         };
-
         if(!d.emp || !d.nom) return alert("Socio, falta el nombre de la empresa o del empleado.");
-
-        // ASIGNACIÓN REAL DE DATOS AL REPORTE (EL ARREGLO)
         const por = (d.cuo / d.sal) * 100;
         document.getElementById('rep-emp-titulo').innerText = d.emp;
         document.getElementById('rep-emp-body').innerText = d.emp;
@@ -208,12 +202,9 @@
         document.getElementById('rep-cuo').innerText = "$ " + d.cuo.toLocaleString();
         document.getElementById('rep-por').innerText = por.toFixed(2) + "%";
         document.getElementById('rep-fecha').innerText = d.fecha;
-
-        // GUARDAR EN BACKUP
         let h = JSON.parse(localStorage.getItem('vp_libranza_vfinal')) || [];
         h.unshift(d);
         localStorage.setItem('vp_libranza_vfinal', JSON.stringify(h));
-        
         renderBackup();
         document.getElementById('reporte-final').style.display = 'block';
         window.scrollTo({ top: document.getElementById('reporte-final').offsetTop, behavior: 'smooth' });
@@ -246,10 +237,8 @@
         document.getElementById('sal').value = d.sal;
         document.getElementById('cuo').value = d.cuo;
         ejecutarAnalisisFinal();
-        alert("Datos recuperados del backup de Vibras Positivas.");
     }
-
-    function borrarTodo() { if(confirm("¿Seguro que quieres borrar todo el historial?")) { localStorage.removeItem('vp_libranza_vfinal'); renderBackup(); } }
+    function borrarTodo() { if(confirm("¿Borrar historial?")) { localStorage.removeItem('vp_libranza_vfinal'); renderBackup(); } }
     renderBackup();
 </script>
 </body>
