@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vibras Positivas - Sistema de Libranza Blindado Pro</title>
+    <style>
+        :root { --vp-gold: #d4af37; --vp-dark: #1a1a1a; --vp-green: #27ae60; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        
+        /* Header de la App */
+        .vp-header { background: var(--vp-dark); color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--vp-gold); }
+        .vp-logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .datetime { font-size: 0.9em; color: var(--vp-gold); margin-top: 5px; }
+
+        .main-content { padding: 30px; display: grid; grid-template-columns: 1fr 380px; gap: 25px; }
+        
+        label { display: block; margin: 10px 0 5px; font-weight: 600; font-size: 0.85em; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; box-sizing: border-box; }
+        
+        /* Botón Amarillo Vibras Positivas */
+        .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+        .btn-analizar:hover { background: #b8962d; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        
+        /* Historial / Backup */
+        .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 550px; overflow-y: auto; }
+        .historial-item { font-size: 0.85em; padding: 12px; border: 1px solid #ddd; background: white; margin-bottom: 8px; border-radius: 5px; cursor: pointer; }
+        .historial-item:hover { border-color: var(--vp-gold); }
+
+        /* Reporte Final */
+        #reporte-final { display: none; padding: 50px; border-top: 2px dashed #ccc; margin-top: 20px; }
+        .clausula-blindada { background: #fffbe6; border: 1px solid #ffe58f; padding: 20px; font-size: 0.9em; margin: 25px 0; text-align: justify; line-height: 1.5; }
+        
+        @media print {
+            .no-print, .vp-header, .history-section, .btn-analizar { display: none !important; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; width: 100%; max-width: 100%; }
+            #reporte-final { display: block !important; border: none; padding: 0; }
+            .main-content { display: block; padding: 0; }
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
+        .legal-footer { font-size: 11px; text-align: center; color: #777; margin-top: 50px; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="vp-header no-print">
+        <div class="vp-logo">VIBRAS POSITIVAS</div>
+        <div class="datetime" id="reloj">Cargando fecha y hora de Colombia...</div>
+    </div>
+
+    <div class="main-content">
+        <div class="form-section no-print">
+            <h3 style="margin-top:0;">⚙️ Estudio de Libranza Blindado</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <label>Empresa Solicitante:</label>
+                    <input type="text" id="emp" placeholder="Ej: DISTRILECO CAUCASIA SAS">
+                    <label>NIT / RUT:</label>
+                    <input type="text" id="nit" placeholder="800183056-9">
+                </div>
+                <div>
+                    <label>Nombre del Empleado:</label>
+                    <input type="text" id="nom" placeholder="Ej: HAROLD A MARIN M">
+                    <label>Cédula:</label>
+                    <input type="text" id="cc" placeholder="4712484">
+                </div>
+            </div>
+            <label>Salario Base ($):</label>
+            <input type="number" id="sal" value="1014980">
+            <label>Cuota Pactada con Banco ($):</label>
+            <input type="number" id="cuo" value="288000">
+            
+            <button class="btn-analizar" onclick="ejecutarAnalisis()">ANALIZAR Y GUARDAR BACKUP</button>
+        </div>
+
+        <div class="history-section no-print">
+            <h4 style="margin-top:0; border-bottom: 2px solid var(--vp-gold)">📜 Historial Recuperable</h4>
+            <div id="lista-historial"></div>
+            <button onclick="limpiarHistorial()" style="color:red; background:none; border:none; cursor:pointer; font-size:11px; margin-top:10px;">🗑️ Borrar Backup</button>
+        </div>
+    </div>
+
+    <div id="reporte-final">
+        <div style="text-align:center;">
+            <h1 id="rep-emp-header" style="text-transform:uppercase; margin-bottom:5px;">EMPRESA</h1>
+            <p style="margin:0;">NIT: <span id="rep-nit-body"></span></p>
+            <hr style="border: 1px solid #000; margin: 20px 0;">
+            <h3>CERTIFICACIÓN DE CAPACIDAD DE PAGO (SISTEMA LIBRANZA)</h3>
+        </div>
+
+        <p><strong>Fecha de Emisión:</strong> <span id="rep-fecha"></span></p>
+        <p>Se certifica que el colaborador <strong><span id="rep-nom"></span></strong>, identificado con la cédula registrada en el sistema, presenta los siguientes indicadores financieros para el descuento solicitado:</p>
+
+        <table>
+            <tr style="background: #f2f2f2;"><th>DESCRIPCIÓN</th><th>VALOR</th></tr>
+            <tr><td>Salario / Ingreso Fijo Mensual</td><td id="rep-sal"></td></tr>
+            <tr><td>Cuota de Crédito a Descontar</td><td id="rep-cuo"></td></tr>
+            <tr><td><strong>Nivel de Afectación de Nómina</strong></td><td><strong id="rep-por"></strong></td></tr>
+        </table>
+
+        <div class="clausula-blindada">
+            <strong>LIMITACIÓN DE RESPONSABILIDAD EMPRESARIAL (Ley 1527 de 2012):</strong><br>
+            La empresa <strong><span id="rep-emp-body"></span></strong> actúa exclusivamente como agente retenedor de la cuota aquí pactada, obligándose únicamente al descuento y traslado de fondos mientras exista vínculo laboral vigente. <br><br>
+            <strong>ACUERDO DE CIERRE:</strong> En el evento de que el trabajador cese sus labores con la empresa por cualquier motivo, la responsabilidad de la empresa cesará tras aplicar el descuento del saldo insoluto sobre las prestaciones sociales (según el límite legal). Cualquier saldo remanente después de dicha liquidación deberá ser saneado y negociado directamente entre el <strong>TRABAJADOR y la ENTIDAD BANCARIA</strong>, quedando la empresa exonerada de cualquier obligación solidaria o deuda pendiente.
+        </div>
+
+        <div style="margin-top: 80px; display: flex; justify-content: space-between; text-align: center;">
+            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Firma del Trabajador</div>
+            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Autorizado por la Empresa</div>
+        </div>
+
+        <div class="legal-footer">
+            App desarrollada por <strong>Vibras Positivas</strong> &copy; 2026 | Derechos de Autor Reservados | Soporte Técnico Autorizado
+        </div>
+        
+        <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE PARA EL BANCO</button>
+    </div>
+</div>
+
+<script>
+    // 1. Reloj en Tiempo Real (Colombia)
+    function actualizarReloj() {
+        const opciones = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        const fechaActual = new Date().toLocaleDateString('es-CO');
+        const horaActual = new Date().toLocaleTimeString('es-CO', opciones);
+        document.getElementById('reloj').innerText = `Colombia: ${fechaActual} | ${horaActual}`;
+    }
+    setInterval(actualizarReloj, 1000);
+
+    // 2. Función Principal (El Botón Amarillo)
+    function ejecutarAnalisis() {
+        const datos = {
+            emp: document.getElementById('emp').value,
+            nit: document.getElementById('nit').value,
+            nom: document.getElementById('nom').value,
+            cc: document.getElementById('cc').value,
+            sal: parseFloat(document.getElementById('sal').value),
+            cuo: parseFloat(document.getElementById('cuo').value),
+            fecha: new Date().toLocaleString('es-CO')
+        };
+
+        if(!datos.emp || !datos.nom) {
+            alert("Error: Ingrese el nombre de la empresa y del empleado.");
+            return;
+        }
+
+        // Mostrar reporte
+        mostrarReporte(datos);
+
+        // Guardar en Backup
+        let historial = JSON.parse(localStorage.getItem('vp_libranza_final')) || [];
+        historial.unshift(datos);
+        localStorage.setItem('vp_libranza_final', JSON.stringify(historial));
+        
+        renderHistorial();
+        document.getElementById('reporte-final').style.display = 'block';
+        
+        // Desplazamiento suave al reporte
+        window.scrollTo({ top: document.getElementById('reporte-final').offsetTop, behavior: 'smooth' });
+    }
+
+    function mostrarReporte(d) {
+        const porcentaje = (d.cuo / d.sal) * 100;
+        document.getElementById('rep-emp-header').innerText = d.emp;
+        document.getElementById('rep-emp-body').innerText = d.emp;
+        document.getElementById('rep-nit-body').innerText = d.nit;
+        document.getElementById('rep-nom').innerText = d.nom;
+        document.getElementById('rep-fecha').innerText = d.fecha;
+        document.getElementById('rep-sal').innerText = "$ " + d.sal.toLocaleString();
+        document.getElementById('rep-cuo').innerText = "$ " + d.cuo.toLocaleString();
+        document.getElementById('rep-por').innerText = porcentaje.toFixed(2) + "%";
+    }
+
+    // 3. Sistema de Backup y Recuperación
+    function renderHistorial() {
+        const lista = document.getElementById('lista-historial');
+        let historial = JSON.parse(localStorage.getItem('vp_libranza_final')) || [];
+        
+        if (historial.length === 0) {
+            lista.innerHTML = "<p style='color:#999; font-size:12px;'>No hay registros en el backup.</p>";
+            return;
+        }
+
+        lista.innerHTML = historial.map((item, index) => `
+            <div class="historial-item" onclick="recuperarDeBackup(${index})">
+                <strong>🏢 ${item.emp}</strong><br>
+                👤 ${item.nom}<br>
+                <small>💰 $${item.cuo.toLocaleString()} | 📅 ${item.fecha}</small>
+            </div>
+        `).join('');
+    }
+
+    function recuperarDeBackup(idx) {
+        const historial = JSON.parse(localStorage.getItem('vp_libranza_final'));
+        const d = historial[idx];
+        
+        document.getElementById('emp').value = d.emp;
+        document.getElementById('nit').value = d.nit;
+        document.getElementById('nom').value = d.nom;
+        document.getElementById('cc').value = d.cc;
+        document.getElementById('sal').value = d.sal;
+        document.getElementById('cuo').value = d.cuo;
+        
+        mostrarReporte(d);
+        document.getElementById('reporte-final').style.display = 'block';
+        alert("Backup recuperado con éxito.");
+    }
+
+    function limpiarHistorial() {
+        if(confirm("¿Seguro que desea eliminar el backup histórico?")) {
+            localStorage.removeItem('vp_libranza_final');
+            renderHistorial();
+        }
+    }
+
+    // Iniciar historial al cargar
+    renderHistorial();
+</script>
+
+</body>
+</html>
