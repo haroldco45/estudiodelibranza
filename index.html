@@ -20,8 +20,23 @@
         .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 15px; }
         .btn-analizar:hover { background: #b8962d; }
 
-        /* NUEVO BOTÓN PARA LA LEY */
-        .btn-ley { background: var(--vp-dark); color: var(--vp-gold); border: 2px solid var(--vp-gold); padding: 10px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; font-size: 12px; margin-top: 10px; text-align: center; text-decoration: none; display: block; }
+        /* BOTÓN PARA LA LEY - CORREGIDO */
+        .btn-ley { 
+            background: var(--vp-dark); 
+            color: var(--vp-gold); 
+            border: 2px solid var(--vp-gold); 
+            padding: 12px; 
+            width: 100%; 
+            cursor: pointer; 
+            font-weight: bold; 
+            border-radius: 5px; 
+            font-size: 13px; 
+            margin-top: 10px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: block; 
+            transition: 0.3s;
+        }
         .btn-ley:hover { background: var(--vp-gold); color: white; }
         
         .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 680px; overflow-y: auto; }
@@ -95,7 +110,7 @@
             
             <button class="btn-analizar" onclick="ejecutarAnalisisFinal()">ANALIZAR, GUARDAR Y MOSTRAR REPORTE</button>
             
-            <a href="ley15272012.html" target="_blank" class="btn-ley">📄 VER E IMPRIMIR LEY 1527 DE 2012 (BASE LEGAL)</a>
+            <a href="ley152172012.html" target="_blank" class="btn-ley">📄 VER E IMPRIMIR LEY 1527 DE 2012 (BASE LEGAL)</a>
         </div>
 
         <div class="history-section no-print">
@@ -162,7 +177,6 @@
 </div>
 
 <script>
-    // (Toda tu lógica de script sigue igual)
     function actualizarReloj() {
         const op = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
         document.getElementById('reloj').innerText = `Colombia: ${new Date().toLocaleDateString('es-CO')} | ${new Date().toLocaleTimeString('es-CO', op)}`;
@@ -185,7 +199,8 @@
             cuo: parseFloat(document.getElementById('cuo').value),
             fecha: new Date().toLocaleString('es-CO')
         };
-        if(!d.emp || !d.nom) return alert("Socio, falta el nombre de la empresa o del empleado.");
+        if(!d.emp || !d.nom) return alert("Faltan datos de la empresa o del empleado.");
+        
         const por = (d.cuo / d.sal) * 100;
         document.getElementById('rep-emp-titulo').innerText = d.emp;
         document.getElementById('rep-emp-body').innerText = d.emp;
@@ -202,9 +217,11 @@
         document.getElementById('rep-cuo').innerText = "$ " + d.cuo.toLocaleString();
         document.getElementById('rep-por').innerText = por.toFixed(2) + "%";
         document.getElementById('rep-fecha').innerText = d.fecha;
+
         let h = JSON.parse(localStorage.getItem('vp_libranza_vfinal')) || [];
         h.unshift(d);
         localStorage.setItem('vp_libranza_vfinal', JSON.stringify(h));
+        
         renderBackup();
         document.getElementById('reporte-final').style.display = 'block';
         window.scrollTo({ top: document.getElementById('reporte-final').offsetTop, behavior: 'smooth' });
