@@ -1,0 +1,20 @@
+.btn-ley { 
+    background: #1a1a1a; 
+    color: #d4af37; 
+    border: 2px solid #d4af37; 
+    padding: 12px; 
+    width: 100%; 
+    cursor: pointer; 
+    font-weight: bold; 
+    border-radius: 5px; 
+    font-size: 13px; 
+    margin-top: 10px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: block; 
+    transition: 0.3s;
+}
+.btn-ley:hover { 
+    background: #d4af37; 
+    color: white; 
+}
