@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Vibras Positivas - Sistema de Libranza Profesional</title>
+    <title>Vibras Positivas - Sistema de Libranza Profesional V3</title>
     <style>
         :root { --vp-gold: #d4af37; --vp-dark: #1a1a1a; --vp-green: #27ae60; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
@@ -20,7 +20,7 @@
         .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 15px; }
         .btn-analizar:hover { background: #b8962d; }
         
-        .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 650px; overflow-y: auto; }
+        .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 680px; overflow-y: auto; }
         .historial-item { font-size: 0.8em; padding: 10px; border: 1px solid #ddd; background: white; margin-bottom: 8px; border-radius: 5px; cursor: pointer; }
 
         #reporte-final { display: none; padding: 40px; border-top: 2px dashed #ccc; position: relative; }
@@ -35,8 +35,8 @@
 
         table { width: 100%; border-collapse: collapse; margin: 15px 0; }
         th, td { border: 1px solid #333; padding: 10px; text-align: left; font-size: 0.9em; }
-        .check-box { display: inline-block; width: 15px; height: 15px; border: 2px solid #000; margin-right: 5px; vertical-align: middle; }
-        .clausula-blindada { background: #fffbe6; border: 1px solid #ffe58f; padding: 15px; font-size: 0.85em; margin-top: 15px; text-align: justify; }
+        .check-box { display: inline-block; width: 18px; height: 18px; border: 2px solid #000; margin-right: 5px; vertical-align: middle; }
+        .clausula-blindada { background: #fffbe6; border: 1px solid #ffe58f; padding: 15px; font-size: 0.85em; margin-top: 15px; text-align: justify; line-height: 1.4; }
         .legal-footer { font-size: 10px; text-align: center; color: #777; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px; }
     </style>
 </head>
@@ -50,77 +50,70 @@
 
     <div class="main-content">
         <div class="form-section no-print">
-            <h3 style="margin-top:0;">📊 Perfil de Crédito Detallado</h3>
+            <h3 style="margin-top:0; color: #1a1a1a;">📝 Perfil de Crédito y Laboral</h3>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div>
                     <label>Empresa Solicitante:</label>
-                    <input type="text" id="emp" placeholder="Ej: Distrileco Caucasia SAS">
+                    <input type="text" id="emp" placeholder="Ej: DISTRILECO CAUCASIA SAS">
                     <label>NIT / RUT:</label>
                     <input type="text" id="nit" placeholder="800183056-9">
                     <label>Nombre del Empleado:</label>
                     <input type="text" id="nom" placeholder="Nombre completo">
                     <label>Cédula:</label>
                     <input type="text" id="cc" placeholder="C.C.">
-                    <label>Cargo del Trabajador:</label>
-                    <input type="text" id="cargo" placeholder="Ej: Asesor de Ventas">
+                    <label>Cargo Actual:</label>
+                    <input type="text" id="cargo" placeholder="Ej: Jefe de Ventas">
+                    <label>Tiempo en la Empresa:</label>
+                    <input type="text" id="tiempo" placeholder="Ej: 3 años y 6 meses">
                 </div>
                 <div>
-                    <label>Tiempo en la Empresa:</label>
-                    <input type="text" id="tiempo" placeholder="Ej: 2 años y 4 meses">
-                    <label>Modalidad del Préstamo:</label>
+                    <label>Modalidad de Préstamo:</label>
                     <select id="modalidad">
-                        <option value="Libranza">Libranza (Nómina)</option>
-                        <option value="Personal">Crédito Personal</option>
+                        <option value="LIBRANZA">Libranza (Nómina)</option>
+                        <option value="CRÉDITO PERSONAL">Crédito Personal</option>
                     </select>
                     <label>Tipo de Crédito:</label>
                     <select id="tipo">
-                        <option value="Nuevo">Crédito Nuevo</option>
-                        <option value="Retanqueo">Viejo (Retanqueo/Refinanciación)</option>
+                        <option value="NUEVO">Crédito Nuevo</option>
+                        <option value="RETANQUEO">Refinanciación (Viejo)</option>
                     </select>
-                    <label>Otros Ingresos Demostrables ($):</label>
+                    <label>Finalidad del Dinero:</label>
+                    <input type="text" id="finalidad" placeholder="Ej: Vivienda / Educación">
+                    <label>Otros Ingresos ($):</label>
                     <input type="number" id="otros" value="0">
-                    <label>Finalidad del Crédito:</label>
-                    <input type="text" id="finalidad" placeholder="Ej: Libre Inversión / Mejora Vivienda">
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:10px;">
-                <div>
                     <label>Salario Base Mensual ($):</label>
                     <input type="number" id="sal" value="1014980">
-                </div>
-                <div>
-                    <label>Cuota Pactada Mensual ($):</label>
+                    <label>Cuota Pactada con Banco ($):</label>
                     <input type="number" id="cuo" value="288000">
                 </div>
             </div>
             
-            <button class="btn-analizar" onclick="ejecutarAnalisisVP()">GENERAR ESTUDIO TÉCNICO COMPLETO</button>
+            <button class="btn-analizar" onclick="ejecutarAnalisisFinal()">ANALIZAR, GUARDAR Y MOSTRAR REPORTE</button>
         </div>
 
         <div class="history-section no-print">
-            <h4 style="margin-top:0; border-bottom: 2px solid var(--vp-gold)">📜 Historial de Backup</h4>
+            <h4 style="margin-top:0; border-bottom: 2px solid var(--vp-gold)">📜 Backup Recuperable</h4>
             <div id="lista-historial"></div>
-            <button onclick="limpiarBackup()" style="color:red; background:none; border:none; cursor:pointer; font-size:11px; margin-top:10px;">🗑️ Borrar Historial</button>
+            <button onclick="borrarTodo()" style="color:red; background:none; border:none; cursor:pointer; font-size:11px; margin-top:10px;">🗑️ Limpiar Base de Datos Local</button>
         </div>
     </div>
 
     <div id="reporte-final">
         <div style="text-align:center;">
-            <h1 id="rep-emp-header" style="text-transform:uppercase; margin-bottom:5px;">EMPRESA</h1>
+            <h1 id="rep-emp-titulo" style="text-transform:uppercase; margin-bottom:5px;">EMPRESA</h1>
             <p style="margin:0;">NIT: <span id="rep-nit-body"></span></p>
-            <hr>
-            <h3>CERTIFICACIÓN DE CAPACIDAD Y ESTUDIO TÉCNICO DE CRÉDITO</h3>
+            <hr style="border: 1px solid #000;">
+            <h3 style="margin-top:10px;">ESTUDIO TÉCNICO Y CERTIFICACIÓN DE LIBRANZA</h3>
         </div>
 
-        <p><strong>Fecha de Emisión:</strong> <span id="rep-fecha"></span></p>
+        <p><strong>FECHA DE EMISIÓN:</strong> <span id="rep-fecha"></span></p>
 
         <table>
-            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">1. INFORMACIÓN LABORAL Y PERFIL</th></tr>
+            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">I. INFORMACIÓN DEL COLABORADOR</th></tr>
             <tr>
-                <td><strong>Empleado:</strong></td><td id="rep-nom"></td>
-                <td><strong>Identificación:</strong></td><td id="rep-cc"></td>
+                <td width="20%"><strong>Empleado:</strong></td><td id="rep-nom" width="30%"></td>
+                <td width="20%"><strong>Identificación:</strong></td><td id="rep-cc" width="30%"></td>
             </tr>
             <tr>
                 <td><strong>Cargo:</strong></td><td id="rep-cargo"></td>
@@ -132,52 +125,54 @@
         </table>
 
         <table>
-            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">2. ANÁLISIS FINANCIERO MENSUAL</th></tr>
+            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">II. ANÁLISIS FINANCIERO Y MODALIDAD</th></tr>
             <tr>
-                <td>Salario Base:</td><td id="rep-sal"></td>
-                <td>Modalidad:</td><td id="rep-modalidad"></td>
+                <td width="25%">Ingreso Base:</td><td id="rep-sal" width="25%"></td>
+                <td width="25%">Modalidad:</td><td id="rep-modalidad" width="25%"></td>
             </tr>
             <tr>
                 <td>Otros Ingresos:</td><td id="rep-otros"></td>
-                <td>Tipo Crédito:</td><td id="rep-tipo"></td>
+                <td>Tipo de Crédito:</td><td id="rep-tipo"></td>
             </tr>
             <tr>
-                <td><strong>Cuota Solicitada:</strong></td><td id="rep-cuo"></td>
-                <td><strong>Capacidad Afectada:</strong></td><td><strong id="rep-por"></strong></td>
+                <td><strong>Cuota Mensual:</strong></td><td id="rep-cuo"></td>
+                <td><strong>Afectación Nómina:</strong></td><td><strong id="rep-por"></strong></td>
             </tr>
         </table>
 
-        <div style="margin: 20px 0; font-weight: bold; border: 1px solid #000; padding: 10px; text-align: center;">
-            ESTADO DE LA SOLICITUD: &nbsp;&nbsp;&nbsp; 
-            <span class="check-box"></span> APROBADA &nbsp;&nbsp;&nbsp; 
-            <span class="check-box"></span> RECHAZADA
+        <div style="margin: 20px 0; border: 2px solid #000; padding: 15px; text-align: center; font-weight: bold; font-size: 1.1em;">
+            DICTAMEN DE LA EMPRESA: &nbsp;&nbsp;&nbsp; 
+            <span class="check-box"></span> SOLICITUD APROBADA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <span class="check-box"></span> SOLICITUD RECHAZADA
         </div>
 
         <div class="clausula-blindada">
-            <strong>LIMITACIÓN DE RESPONSABILIDAD (Ley 1527 de 2012):</strong> La empresa <strong><span id="rep-emp-body"></span></strong> actúa exclusivamente como agente retenedor de la cuota mensual pactada entre el trabajador y el banco mientras exista contrato laboral vigente. En caso de retiro, la empresa aplicará el descuento del saldo insoluto de las prestaciones sociales según el límite legal. Cualquier saldo pendiente tras la liquidación final es responsabilidad exclusiva del <strong>TRABAJADOR</strong> con el <strong>BANCO</strong>, sin que exista obligación solidaria por parte de la empresa.
+            <strong>AVISO LEGAL (Ley 1527 de 2012):</strong> La empresa <strong><span id="rep-emp-body"></span></strong> actúa solo como intermediario para el recaudo (agente retenedor). La responsabilidad de pago mensual cesará automáticamente al finalizar el vínculo laboral. En caso de retiro, se autoriza descontar el saldo pendiente de las prestaciones sociales. Cualquier deuda remanente deberá ser gestionada directamente entre el <strong>TRABAJADOR</strong> y el <strong>BANCO</strong>, sin responsabilidad solidaria de la empresa.
         </div>
 
-        <div style="margin-top: 60px; display: flex; justify-content: space-between; text-align: center;">
-            <div style="width: 40%; border-top: 1px solid #000;">Firma del Trabajador</div>
-            <div style="width: 40%; border-top: 1px solid #000;">Firma Autorizada Empresa</div>
+        <div style="margin-top: 70px; display: flex; justify-content: space-between; text-align: center;">
+            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Firma del Trabajador / C.C.</div>
+            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Autorizado por la Empresa</div>
         </div>
 
         <div class="legal-footer">
-            Software desarrollado por <strong>Vibras Positivas</strong> &copy; 2026 | Propiedad Intelectual Registrada | Soporte Técnico
+            Reporte generado por el software de <strong>Vibras Positivas</strong> &copy; 2026 | Soporte Técnico y Propiedad Intelectual
         </div>
         
-        <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE OFICIAL</button>
+        <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE PARA TRÁMITE</button>
     </div>
 </div>
 
 <script>
+    // Reloj Colombia
     function actualizarReloj() {
         const op = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
         document.getElementById('reloj').innerText = `Colombia: ${new Date().toLocaleDateString('es-CO')} | ${new Date().toLocaleTimeString('es-CO', op)}`;
     }
     setInterval(actualizarReloj, 1000);
 
-    function ejecutarAnalisisVP() {
+    // Función que arregla el envío de datos al reporte
+    function ejecutarAnalisisFinal() {
         const d = {
             emp: document.getElementById('emp').value,
             nit: document.getElementById('nit').value,
@@ -187,18 +182,18 @@
             tiempo: document.getElementById('tiempo').value,
             modalidad: document.getElementById('modalidad').value,
             tipo: document.getElementById('tipo').value,
-            otros: parseFloat(document.getElementById('otros').value),
             finalidad: document.getElementById('finalidad').value,
+            otros: parseFloat(document.getElementById('otros').value) || 0,
             sal: parseFloat(document.getElementById('sal').value),
             cuo: parseFloat(document.getElementById('cuo').value),
             fecha: new Date().toLocaleString('es-CO')
         };
 
-        if(!d.emp || !d.nom) return alert("Complete los datos de Empresa y Empleado.");
+        if(!d.emp || !d.nom) return alert("Socio, falta el nombre de la empresa o del empleado.");
 
-        // Render Reporte
+        // ASIGNACIÓN REAL DE DATOS AL REPORTE (EL ARREGLO)
         const por = (d.cuo / d.sal) * 100;
-        document.getElementById('rep-emp-header').innerText = d.emp;
+        document.getElementById('rep-emp-titulo').innerText = d.emp;
         document.getElementById('rep-emp-body').innerText = d.emp;
         document.getElementById('rep-nit-body').innerText = d.nit;
         document.getElementById('rep-nom').innerText = d.nom;
@@ -214,10 +209,10 @@
         document.getElementById('rep-por').innerText = por.toFixed(2) + "%";
         document.getElementById('rep-fecha').innerText = d.fecha;
 
-        // Backup
-        let h = JSON.parse(localStorage.getItem('vp_libranza_v3')) || [];
+        // GUARDAR EN BACKUP
+        let h = JSON.parse(localStorage.getItem('vp_libranza_vfinal')) || [];
         h.unshift(d);
-        localStorage.setItem('vp_libranza_v3', JSON.stringify(h));
+        localStorage.setItem('vp_libranza_vfinal', JSON.stringify(h));
         
         renderBackup();
         document.getElementById('reporte-final').style.display = 'block';
@@ -226,18 +221,18 @@
 
     function renderBackup() {
         const l = document.getElementById('lista-historial');
-        let h = JSON.parse(localStorage.getItem('vp_libranza_v3')) || [];
+        let h = JSON.parse(localStorage.getItem('vp_libranza_vfinal')) || [];
         l.innerHTML = h.map((i, idx) => `
             <div class="historial-item" onclick="recuperar(${idx})">
                 <strong>🏢 ${i.emp}</strong><br>
-                👤 ${i.nom} (${i.cargo})<br>
+                👤 ${i.nom}<br>
                 <small>💰 $${i.cuo.toLocaleString()} | 📅 ${i.fecha}</small>
             </div>
         `).join('') || "<p style='font-size:12px; color:#999;'>Historial vacío.</p>";
     }
 
     function recuperar(idx) {
-        const d = JSON.parse(localStorage.getItem('vp_libranza_v3'))[idx];
+        const d = JSON.parse(localStorage.getItem('vp_libranza_vfinal'))[idx];
         document.getElementById('emp').value = d.emp;
         document.getElementById('nit').value = d.nit;
         document.getElementById('nom').value = d.nom;
@@ -250,11 +245,11 @@
         document.getElementById('finalidad').value = d.finalidad;
         document.getElementById('sal').value = d.sal;
         document.getElementById('cuo').value = d.cuo;
-        ejecutarAnalisisVP();
-        alert("Backup recuperado con éxito.");
+        ejecutarAnalisisFinal();
+        alert("Datos recuperados del backup de Vibras Positivas.");
     }
 
-    function limpiarBackup() { if(confirm("¿Borrar historial?")) { localStorage.removeItem('vp_libranza_v3'); renderBackup(); } }
+    function borrarTodo() { if(confirm("¿Seguro que quieres borrar todo el historial?")) { localStorage.removeItem('vp_libranza_vfinal'); renderBackup(); } }
     renderBackup();
 </script>
 </body>
