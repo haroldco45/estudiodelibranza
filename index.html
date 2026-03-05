@@ -2,34 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Vibras Positivas - Sistema de Libranza Blindado Pro</title>
+    <title>Vibras Positivas - Sistema de Libranza Profesional</title>
     <style>
         :root { --vp-gold: #d4af37; --vp-dark: #1a1a1a; --vp-green: #27ae60; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .container { max-width: 1200px; margin: auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
-        /* Header de la App */
         .vp-header { background: var(--vp-dark); color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--vp-gold); }
         .vp-logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
         .datetime { font-size: 0.9em; color: var(--vp-gold); margin-top: 5px; }
 
-        .main-content { padding: 30px; display: grid; grid-template-columns: 1fr 380px; gap: 25px; }
+        .main-content { padding: 30px; display: grid; grid-template-columns: 1fr 350px; gap: 25px; }
         
-        label { display: block; margin: 10px 0 5px; font-weight: 600; font-size: 0.85em; }
-        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; box-sizing: border-box; }
+        label { display: block; margin: 8px 0 3px; font-weight: 600; font-size: 0.8em; color: #555; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 8px; box-sizing: border-box; font-size: 0.9em; }
         
-        /* Botón Amarillo Vibras Positivas */
-        .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 10px; transition: 0.3s; }
-        .btn-analizar:hover { background: #b8962d; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn-analizar { background: #d4af37; color: white; border: none; padding: 18px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 16px; margin-top: 15px; }
+        .btn-analizar:hover { background: #b8962d; }
         
-        /* Historial / Backup */
-        .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 550px; overflow-y: auto; }
-        .historial-item { font-size: 0.85em; padding: 12px; border: 1px solid #ddd; background: white; margin-bottom: 8px; border-radius: 5px; cursor: pointer; }
-        .historial-item:hover { border-color: var(--vp-gold); }
+        .history-section { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; height: 650px; overflow-y: auto; }
+        .historial-item { font-size: 0.8em; padding: 10px; border: 1px solid #ddd; background: white; margin-bottom: 8px; border-radius: 5px; cursor: pointer; }
 
-        /* Reporte Final */
-        #reporte-final { display: none; padding: 50px; border-top: 2px dashed #ccc; margin-top: 20px; }
-        .clausula-blindada { background: #fffbe6; border: 1px solid #ffe58f; padding: 20px; font-size: 0.9em; margin: 25px 0; text-align: justify; line-height: 1.5; }
+        #reporte-final { display: none; padding: 40px; border-top: 2px dashed #ccc; position: relative; }
         
         @media print {
             .no-print, .vp-header, .history-section, .btn-analizar { display: none !important; }
@@ -39,9 +33,11 @@
             .main-content { display: block; padding: 0; }
         }
 
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
-        .legal-footer { font-size: 11px; text-align: center; color: #777; margin-top: 50px; border-top: 1px solid #eee; padding-top: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: left; font-size: 0.9em; }
+        .check-box { display: inline-block; width: 15px; height: 15px; border: 2px solid #000; margin-right: 5px; vertical-align: middle; }
+        .clausula-blindada { background: #fffbe6; border: 1px solid #ffe58f; padding: 15px; font-size: 0.85em; margin-top: 15px; text-align: justify; }
+        .legal-footer { font-size: 10px; text-align: center; color: #777; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px; }
     </style>
 </head>
 <body>
@@ -49,38 +45,64 @@
 <div class="container">
     <div class="vp-header no-print">
         <div class="vp-logo">VIBRAS POSITIVAS</div>
-        <div class="datetime" id="reloj">Cargando fecha y hora de Colombia...</div>
+        <div class="datetime" id="reloj">Colombia: --/--/---- | --:--:--</div>
     </div>
 
     <div class="main-content">
         <div class="form-section no-print">
-            <h3 style="margin-top:0;">⚙️ Estudio de Libranza Blindado</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <h3 style="margin-top:0;">📊 Perfil de Crédito Detallado</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div>
                     <label>Empresa Solicitante:</label>
-                    <input type="text" id="emp" placeholder="Ej: DISTRILECO CAUCASIA SAS">
+                    <input type="text" id="emp" placeholder="Ej: Distrileco Caucasia SAS">
                     <label>NIT / RUT:</label>
                     <input type="text" id="nit" placeholder="800183056-9">
+                    <label>Nombre del Empleado:</label>
+                    <input type="text" id="nom" placeholder="Nombre completo">
+                    <label>Cédula:</label>
+                    <input type="text" id="cc" placeholder="C.C.">
+                    <label>Cargo del Trabajador:</label>
+                    <input type="text" id="cargo" placeholder="Ej: Asesor de Ventas">
                 </div>
                 <div>
-                    <label>Nombre del Empleado:</label>
-                    <input type="text" id="nom" placeholder="Ej: HAROLD A MARIN M">
-                    <label>Cédula:</label>
-                    <input type="text" id="cc" placeholder="4712484">
+                    <label>Tiempo en la Empresa:</label>
+                    <input type="text" id="tiempo" placeholder="Ej: 2 años y 4 meses">
+                    <label>Modalidad del Préstamo:</label>
+                    <select id="modalidad">
+                        <option value="Libranza">Libranza (Nómina)</option>
+                        <option value="Personal">Crédito Personal</option>
+                    </select>
+                    <label>Tipo de Crédito:</label>
+                    <select id="tipo">
+                        <option value="Nuevo">Crédito Nuevo</option>
+                        <option value="Retanqueo">Viejo (Retanqueo/Refinanciación)</option>
+                    </select>
+                    <label>Otros Ingresos Demostrables ($):</label>
+                    <input type="number" id="otros" value="0">
+                    <label>Finalidad del Crédito:</label>
+                    <input type="text" id="finalidad" placeholder="Ej: Libre Inversión / Mejora Vivienda">
                 </div>
             </div>
-            <label>Salario Base ($):</label>
-            <input type="number" id="sal" value="1014980">
-            <label>Cuota Pactada con Banco ($):</label>
-            <input type="number" id="cuo" value="288000">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:10px;">
+                <div>
+                    <label>Salario Base Mensual ($):</label>
+                    <input type="number" id="sal" value="1014980">
+                </div>
+                <div>
+                    <label>Cuota Pactada Mensual ($):</label>
+                    <input type="number" id="cuo" value="288000">
+                </div>
+            </div>
             
-            <button class="btn-analizar" onclick="ejecutarAnalisis()">ANALIZAR Y GUARDAR BACKUP</button>
+            <button class="btn-analizar" onclick="ejecutarAnalisisVP()">GENERAR ESTUDIO TÉCNICO COMPLETO</button>
         </div>
 
         <div class="history-section no-print">
-            <h4 style="margin-top:0; border-bottom: 2px solid var(--vp-gold)">📜 Historial Recuperable</h4>
+            <h4 style="margin-top:0; border-bottom: 2px solid var(--vp-gold)">📜 Historial de Backup</h4>
             <div id="lista-historial"></div>
-            <button onclick="limpiarHistorial()" style="color:red; background:none; border:none; cursor:pointer; font-size:11px; margin-top:10px;">🗑️ Borrar Backup</button>
+            <button onclick="limpiarBackup()" style="color:red; background:none; border:none; cursor:pointer; font-size:11px; margin-top:10px;">🗑️ Borrar Historial</button>
         </div>
     </div>
 
@@ -88,138 +110,152 @@
         <div style="text-align:center;">
             <h1 id="rep-emp-header" style="text-transform:uppercase; margin-bottom:5px;">EMPRESA</h1>
             <p style="margin:0;">NIT: <span id="rep-nit-body"></span></p>
-            <hr style="border: 1px solid #000; margin: 20px 0;">
-            <h3>CERTIFICACIÓN DE CAPACIDAD DE PAGO (SISTEMA LIBRANZA)</h3>
+            <hr>
+            <h3>CERTIFICACIÓN DE CAPACIDAD Y ESTUDIO TÉCNICO DE CRÉDITO</h3>
         </div>
 
         <p><strong>Fecha de Emisión:</strong> <span id="rep-fecha"></span></p>
-        <p>Se certifica que el colaborador <strong><span id="rep-nom"></span></strong>, identificado con la cédula registrada en el sistema, presenta los siguientes indicadores financieros para el descuento solicitado:</p>
 
         <table>
-            <tr style="background: #f2f2f2;"><th>DESCRIPCIÓN</th><th>VALOR</th></tr>
-            <tr><td>Salario / Ingreso Fijo Mensual</td><td id="rep-sal"></td></tr>
-            <tr><td>Cuota de Crédito a Descontar</td><td id="rep-cuo"></td></tr>
-            <tr><td><strong>Nivel de Afectación de Nómina</strong></td><td><strong id="rep-por"></strong></td></tr>
+            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">1. INFORMACIÓN LABORAL Y PERFIL</th></tr>
+            <tr>
+                <td><strong>Empleado:</strong></td><td id="rep-nom"></td>
+                <td><strong>Identificación:</strong></td><td id="rep-cc"></td>
+            </tr>
+            <tr>
+                <td><strong>Cargo:</strong></td><td id="rep-cargo"></td>
+                <td><strong>Antigüedad:</strong></td><td id="rep-tiempo"></td>
+            </tr>
+            <tr>
+                <td><strong>Finalidad:</strong></td><td id="rep-finalidad" colspan="3"></td>
+            </tr>
         </table>
 
-        <div class="clausula-blindada">
-            <strong>LIMITACIÓN DE RESPONSABILIDAD EMPRESARIAL (Ley 1527 de 2012):</strong><br>
-            La empresa <strong><span id="rep-emp-body"></span></strong> actúa exclusivamente como agente retenedor de la cuota aquí pactada, obligándose únicamente al descuento y traslado de fondos mientras exista vínculo laboral vigente. <br><br>
-            <strong>ACUERDO DE CIERRE:</strong> En el evento de que el trabajador cese sus labores con la empresa por cualquier motivo, la responsabilidad de la empresa cesará tras aplicar el descuento del saldo insoluto sobre las prestaciones sociales (según el límite legal). Cualquier saldo remanente después de dicha liquidación deberá ser saneado y negociado directamente entre el <strong>TRABAJADOR y la ENTIDAD BANCARIA</strong>, quedando la empresa exonerada de cualquier obligación solidaria o deuda pendiente.
+        <table>
+            <tr><th colspan="4" style="background:#f2f2f2; text-align:center;">2. ANÁLISIS FINANCIERO MENSUAL</th></tr>
+            <tr>
+                <td>Salario Base:</td><td id="rep-sal"></td>
+                <td>Modalidad:</td><td id="rep-modalidad"></td>
+            </tr>
+            <tr>
+                <td>Otros Ingresos:</td><td id="rep-otros"></td>
+                <td>Tipo Crédito:</td><td id="rep-tipo"></td>
+            </tr>
+            <tr>
+                <td><strong>Cuota Solicitada:</strong></td><td id="rep-cuo"></td>
+                <td><strong>Capacidad Afectada:</strong></td><td><strong id="rep-por"></strong></td>
+            </tr>
+        </table>
+
+        <div style="margin: 20px 0; font-weight: bold; border: 1px solid #000; padding: 10px; text-align: center;">
+            ESTADO DE LA SOLICITUD: &nbsp;&nbsp;&nbsp; 
+            <span class="check-box"></span> APROBADA &nbsp;&nbsp;&nbsp; 
+            <span class="check-box"></span> RECHAZADA
         </div>
 
-        <div style="margin-top: 80px; display: flex; justify-content: space-between; text-align: center;">
-            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Firma del Trabajador</div>
-            <div style="width: 40%; border-top: 1px solid #000; padding-top: 5px;">Autorizado por la Empresa</div>
+        <div class="clausula-blindada">
+            <strong>LIMITACIÓN DE RESPONSABILIDAD (Ley 1527 de 2012):</strong> La empresa <strong><span id="rep-emp-body"></span></strong> actúa exclusivamente como agente retenedor de la cuota mensual pactada entre el trabajador y el banco mientras exista contrato laboral vigente. En caso de retiro, la empresa aplicará el descuento del saldo insoluto de las prestaciones sociales según el límite legal. Cualquier saldo pendiente tras la liquidación final es responsabilidad exclusiva del <strong>TRABAJADOR</strong> con el <strong>BANCO</strong>, sin que exista obligación solidaria por parte de la empresa.
+        </div>
+
+        <div style="margin-top: 60px; display: flex; justify-content: space-between; text-align: center;">
+            <div style="width: 40%; border-top: 1px solid #000;">Firma del Trabajador</div>
+            <div style="width: 40%; border-top: 1px solid #000;">Firma Autorizada Empresa</div>
         </div>
 
         <div class="legal-footer">
-            App desarrollada por <strong>Vibras Positivas</strong> &copy; 2026 | Derechos de Autor Reservados | Soporte Técnico Autorizado
+            Software desarrollado por <strong>Vibras Positivas</strong> &copy; 2026 | Propiedad Intelectual Registrada | Soporte Técnico
         </div>
         
-        <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE PARA EL BANCO</button>
+        <button class="no-print btn-analizar" onclick="window.print()" style="background:var(--vp-green); margin-top:30px;">🖨️ IMPRIMIR REPORTE OFICIAL</button>
     </div>
 </div>
 
 <script>
-    // 1. Reloj en Tiempo Real (Colombia)
     function actualizarReloj() {
-        const opciones = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-        const fechaActual = new Date().toLocaleDateString('es-CO');
-        const horaActual = new Date().toLocaleTimeString('es-CO', opciones);
-        document.getElementById('reloj').innerText = `Colombia: ${fechaActual} | ${horaActual}`;
+        const op = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        document.getElementById('reloj').innerText = `Colombia: ${new Date().toLocaleDateString('es-CO')} | ${new Date().toLocaleTimeString('es-CO', op)}`;
     }
     setInterval(actualizarReloj, 1000);
 
-    // 2. Función Principal (El Botón Amarillo)
-    function ejecutarAnalisis() {
-        const datos = {
+    function ejecutarAnalisisVP() {
+        const d = {
             emp: document.getElementById('emp').value,
             nit: document.getElementById('nit').value,
             nom: document.getElementById('nom').value,
             cc: document.getElementById('cc').value,
+            cargo: document.getElementById('cargo').value,
+            tiempo: document.getElementById('tiempo').value,
+            modalidad: document.getElementById('modalidad').value,
+            tipo: document.getElementById('tipo').value,
+            otros: parseFloat(document.getElementById('otros').value),
+            finalidad: document.getElementById('finalidad').value,
             sal: parseFloat(document.getElementById('sal').value),
             cuo: parseFloat(document.getElementById('cuo').value),
             fecha: new Date().toLocaleString('es-CO')
         };
 
-        if(!datos.emp || !datos.nom) {
-            alert("Error: Ingrese el nombre de la empresa y del empleado.");
-            return;
-        }
+        if(!d.emp || !d.nom) return alert("Complete los datos de Empresa y Empleado.");
 
-        // Mostrar reporte
-        mostrarReporte(datos);
-
-        // Guardar en Backup
-        let historial = JSON.parse(localStorage.getItem('vp_libranza_final')) || [];
-        historial.unshift(datos);
-        localStorage.setItem('vp_libranza_final', JSON.stringify(historial));
-        
-        renderHistorial();
-        document.getElementById('reporte-final').style.display = 'block';
-        
-        // Desplazamiento suave al reporte
-        window.scrollTo({ top: document.getElementById('reporte-final').offsetTop, behavior: 'smooth' });
-    }
-
-    function mostrarReporte(d) {
-        const porcentaje = (d.cuo / d.sal) * 100;
+        // Render Reporte
+        const por = (d.cuo / d.sal) * 100;
         document.getElementById('rep-emp-header').innerText = d.emp;
         document.getElementById('rep-emp-body').innerText = d.emp;
         document.getElementById('rep-nit-body').innerText = d.nit;
         document.getElementById('rep-nom').innerText = d.nom;
-        document.getElementById('rep-fecha').innerText = d.fecha;
+        document.getElementById('rep-cc').innerText = d.cc;
+        document.getElementById('rep-cargo').innerText = d.cargo;
+        document.getElementById('rep-tiempo').innerText = d.tiempo;
+        document.getElementById('rep-finalidad').innerText = d.finalidad;
+        document.getElementById('rep-modalidad').innerText = d.modalidad;
+        document.getElementById('rep-tipo').innerText = d.tipo;
+        document.getElementById('rep-otros').innerText = "$ " + d.otros.toLocaleString();
         document.getElementById('rep-sal').innerText = "$ " + d.sal.toLocaleString();
         document.getElementById('rep-cuo').innerText = "$ " + d.cuo.toLocaleString();
-        document.getElementById('rep-por').innerText = porcentaje.toFixed(2) + "%";
+        document.getElementById('rep-por').innerText = por.toFixed(2) + "%";
+        document.getElementById('rep-fecha').innerText = d.fecha;
+
+        // Backup
+        let h = JSON.parse(localStorage.getItem('vp_libranza_v3')) || [];
+        h.unshift(d);
+        localStorage.setItem('vp_libranza_v3', JSON.stringify(h));
+        
+        renderBackup();
+        document.getElementById('reporte-final').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('reporte-final').offsetTop, behavior: 'smooth' });
     }
 
-    // 3. Sistema de Backup y Recuperación
-    function renderHistorial() {
-        const lista = document.getElementById('lista-historial');
-        let historial = JSON.parse(localStorage.getItem('vp_libranza_final')) || [];
-        
-        if (historial.length === 0) {
-            lista.innerHTML = "<p style='color:#999; font-size:12px;'>No hay registros en el backup.</p>";
-            return;
-        }
-
-        lista.innerHTML = historial.map((item, index) => `
-            <div class="historial-item" onclick="recuperarDeBackup(${index})">
-                <strong>🏢 ${item.emp}</strong><br>
-                👤 ${item.nom}<br>
-                <small>💰 $${item.cuo.toLocaleString()} | 📅 ${item.fecha}</small>
+    function renderBackup() {
+        const l = document.getElementById('lista-historial');
+        let h = JSON.parse(localStorage.getItem('vp_libranza_v3')) || [];
+        l.innerHTML = h.map((i, idx) => `
+            <div class="historial-item" onclick="recuperar(${idx})">
+                <strong>🏢 ${i.emp}</strong><br>
+                👤 ${i.nom} (${i.cargo})<br>
+                <small>💰 $${i.cuo.toLocaleString()} | 📅 ${i.fecha}</small>
             </div>
-        `).join('');
+        `).join('') || "<p style='font-size:12px; color:#999;'>Historial vacío.</p>";
     }
 
-    function recuperarDeBackup(idx) {
-        const historial = JSON.parse(localStorage.getItem('vp_libranza_final'));
-        const d = historial[idx];
-        
+    function recuperar(idx) {
+        const d = JSON.parse(localStorage.getItem('vp_libranza_v3'))[idx];
         document.getElementById('emp').value = d.emp;
         document.getElementById('nit').value = d.nit;
         document.getElementById('nom').value = d.nom;
         document.getElementById('cc').value = d.cc;
+        document.getElementById('cargo').value = d.cargo;
+        document.getElementById('tiempo').value = d.tiempo;
+        document.getElementById('modalidad').value = d.modalidad;
+        document.getElementById('tipo').value = d.tipo;
+        document.getElementById('otros').value = d.otros;
+        document.getElementById('finalidad').value = d.finalidad;
         document.getElementById('sal').value = d.sal;
         document.getElementById('cuo').value = d.cuo;
-        
-        mostrarReporte(d);
-        document.getElementById('reporte-final').style.display = 'block';
+        ejecutarAnalisisVP();
         alert("Backup recuperado con éxito.");
     }
 
-    function limpiarHistorial() {
-        if(confirm("¿Seguro que desea eliminar el backup histórico?")) {
-            localStorage.removeItem('vp_libranza_final');
-            renderHistorial();
-        }
-    }
-
-    // Iniciar historial al cargar
-    renderHistorial();
+    function limpiarBackup() { if(confirm("¿Borrar historial?")) { localStorage.removeItem('vp_libranza_v3'); renderBackup(); } }
+    renderBackup();
 </script>
-
 </body>
 </html>
